@@ -17,6 +17,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 30
+    restart: unless-stopped
 
   restaurant-db:
     image: postgres:16
@@ -32,6 +33,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 30
+    restart: unless-stopped
 
   order-db:
     image: postgres:16
@@ -47,6 +49,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 30
+    restart: unless-stopped
 
   payment-db:
     image: postgres:16
@@ -62,6 +65,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 30
+    restart: unless-stopped
 
   delivery-db:
     image: postgres:16
@@ -77,6 +81,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 30
+    restart: unless-stopped
 
   # --------- Microservices ----------
   customer-service:
@@ -84,16 +89,40 @@ services:
     environment:
       DATABASE_URL: postgresql://customer:customerpw@customer-db:5432/customerdb
     depends_on:
-      - customer-db
+      customer-db:
+        condition: service_healthy
     ports: ["8010:80"]
+    restart: unless-stopped
 
   restaurant-service:
     build: ./restaurant-service
     environment:
       DATABASE_URL: postgresql://restaurant:restaurantpw@restaurant-db:5432/restaurantdb
     depends_on:
-      - restaurant-db
+      restaurant-db:
+        condition: service_healthy
     ports: ["8020:80"]
+    restart: unless-stopped
+
+  payment-service:
+    build: ./payment-service
+    environment:
+      DATABASE_URL: postgresql://payment:paymentpw@payment-db:5432/paymentdb
+    depends_on:
+      payment-db:
+        condition: service_healthy
+    ports: ["8040:80"]
+    restart: unless-stopped
+
+  delivery-service:
+    build: ./delivery-service
+    environment:
+      DATABASE_URL: postgresql://delivery:deliverypw@delivery-db:5432/deliverydb
+    depends_on:
+      delivery-db:
+        condition: service_healthy
+    ports: ["8050:80"]
+    restart: unless-stopped
 
   order-service:
     build: ./order-service
@@ -104,32 +133,23 @@ services:
       DELIVERY_SERVICE_URL: http://delivery-service:80
       NOTIFICATION_SERVICE_URL: http://notification-service:80
     depends_on:
-      - order-db
-      - restaurant-service
-      - payment-service
-      - delivery-service
-      - notification-service
+      order-db:
+        condition: service_healthy
+      restaurant-service:
+        condition: service_started
+      payment-service:
+        condition: service_started
+      delivery-service:
+        condition: service_started
+      notification-service:
+        condition: service_started
     ports: ["8030:80"]
-
-  payment-service:
-    build: ./payment-service
-    environment:
-      DATABASE_URL: postgresql://payment:paymentpw@payment-db:5432/paymentdb
-    depends_on:
-      - payment-db
-    ports: ["8040:80"]
-
-  delivery-service:
-    build: ./delivery-service
-    environment:
-      DATABASE_URL: postgresql://delivery:deliverypw@delivery-db:5432/deliverydb
-    depends_on:
-      - delivery-db
-    ports: ["8050:80"]
+    restart: unless-stopped
 
   notification-service:
     build: ./notification-service
     ports: ["8060:80"]
+    restart: unless-stopped
 
   # --------- Monitoring ----------
   prometheus:
@@ -137,16 +157,20 @@ services:
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
     ports: ["9090:9090"]
+    restart: unless-stopped
 
   grafana:
     image: grafana/grafana:11.1.4
     ports: ["3000:3000"]
     depends_on:
-      - prometheus
+      prometheus:
+        condition: service_started
+    restart: unless-stopped
 
   jaeger:
     image: jaegertracing/all-in-one:1.57
     ports: ["16686:16686"]
+    restart: unless-stopped
 
   # --------- One-off seeders (for CSV data import) ----------
   customer-seed:
@@ -220,4 +244,3 @@ volumes:
   order-data:
   payment-data:
   delivery-data:
-
