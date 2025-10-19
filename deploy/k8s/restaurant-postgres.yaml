@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: restaurant-pvc
+  namespace: foodgo
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restaurant-db
+  namespace: foodgo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: restaurant-db
+  template:
+    metadata:
+      labels:
+        app: restaurant-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports: [{containerPort: 5432}]
+          env:
+            - name: POSTGRES_DB
+              value: "restaurantdb"
+            - name: POSTGRES_USER
+              value: "restaurant"
+            - name: POSTGRES_PASSWORD
+              value: "restaurantpw"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: restaurant-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restaurant-db
+  namespace: foodgo
+spec:
+  type: ClusterIP
+  selector:
+    app: restaurant-db
+  ports:
+    - port: 5432
+      targetPort: 5432

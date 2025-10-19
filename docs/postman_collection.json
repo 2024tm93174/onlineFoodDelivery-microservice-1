@@ -1,0 +1,89 @@
+{
+  "info": {
+    "name": "FoodGo Microservices",
+    "_postman_id": "abcd-1234",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8010/v1/customers",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8010",
+          "path": [
+            "v1",
+            "customers"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Alice\", \"email\": \"alice@example.com\", \"phone\": \"900000001\"}"
+        }
+      }
+    },
+    {
+      "name": "List Restaurants (Bengaluru)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8020/v1/restaurants?city=Bengaluru",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8020",
+          "path": [
+            "v1",
+            "restaurants"
+          ],
+          "query": [
+            {
+              "key": "city",
+              "value": "Bengaluru"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Place Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Idempotency-Key",
+            "value": "demo-123"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8030/v1/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8030",
+          "path": [
+            "v1",
+            "orders"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\": 1, \"restaurant_id\": 1, \"address_id\": 1, \"city\": \"Bengaluru\", \"payment_method\": \"CARD\", \"lines\": [{\"item_id\": 1, \"quantity\": 2}, {\"item_id\": 2, \"quantity\": 1}]}"
+        }
+      }
+    }
+  ]
+}

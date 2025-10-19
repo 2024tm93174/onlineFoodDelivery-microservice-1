@@ -1,0 +1,217 @@
+name: foodgo
+services:
+  # --------- Databases ----------
+  customer-db:
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U customer -d customerdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    image: postgres:16
+    container_name: customer-db
+    environment:
+      POSTGRES_DB: customerdb
+      POSTGRES_USER: customer
+      POSTGRES_PASSWORD: customerpw
+    ports: ["5433:5432"]
+    volumes:
+      - customer-data:/var/lib/postgresql/data
+
+  restaurant-db:
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U restaurant -d restaurantdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    image: postgres:16
+    environment:
+      POSTGRES_DB: restaurantdb
+      POSTGRES_USER: restaurant
+      POSTGRES_PASSWORD: restaurantpw
+    ports: ["5434:5432"]
+    volumes:
+      - restaurant-data:/var/lib/postgresql/data
+
+  order-db:
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U order -d orderdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    image: postgres:16
+    environment:
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: order
+      POSTGRES_PASSWORD: orderpw
+    ports: ["5435:5432"]
+    volumes:
+      - order-data:/var/lib/postgresql/data
+
+  payment-db:
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U payment -d paymentdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    image: postgres:16
+    environment:
+      POSTGRES_DB: paymentdb
+      POSTGRES_USER: payment
+      POSTGRES_PASSWORD: paymentpw
+    ports: ["5436:5432"]
+    volumes:
+      - payment-data:/var/lib/postgresql/data
+
+  delivery-db:
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U delivery -d deliverydb"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    image: postgres:16
+    environment:
+      POSTGRES_DB: deliverydb
+      POSTGRES_USER: delivery
+      POSTGRES_PASSWORD: deliverypw
+    ports: ["5437:5432"]
+    volumes:
+      - delivery-data:/var/lib/postgresql/data
+
+  # --------- Services ----------
+  customer-service:
+    build: ./customer-service
+    environment:
+      DATABASE_URL: postgresql://customer:customerpw@customer-db:5432/customerdb
+    depends_on: [customer-db]
+    ports: ["8010:80"]
+
+  restaurant-service:
+    build: ./restaurant-service
+    environment:
+      DATABASE_URL: postgresql://restaurant:restaurantpw@restaurant-db:5432/restaurantdb
+    depends_on: [restaurant-db]
+    ports: ["8020:80"]
+
+  order-service:
+    build: ./order-service
+    environment:
+      DATABASE_URL: postgresql://order:orderpw@order-db:5432/orderdb
+      RESTAURANT_SERVICE_URL: http://restaurant-service:80
+      PAYMENT_SERVICE_URL: http://payment-service:80
+      DELIVERY_SERVICE_URL: http://delivery-service:80
+      NOTIFICATION_SERVICE_URL: http://notification-service:80
+    depends_on: [order-db, restaurant-service, payment-service, delivery-service, notification-service]
+    ports: ["8030:80"]
+
+  payment-service:
+    build: ./payment-service
+    environment:
+      DATABASE_URL: postgresql://payment:paymentpw@payment-db:5432/paymentdb
+    depends_on: [payment-db]
+    ports: ["8040:80"]
+
+  delivery-service:
+    build: ./delivery-service
+    environment:
+      DATABASE_URL: postgresql://delivery:deliverypw@delivery-db:5432/deliverydb
+    depends_on: [delivery-db]
+    ports: ["8050:80"]
+
+  notification-service:
+    build: ./notification-service
+    ports: ["8060:80"]
+
+  # --------- Monitoring ----------
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports: ["9090:9090"]
+
+  grafana:
+    image: grafana/grafana:11.1.4
+    ports: ["3000:3000"]
+    depends_on: [prometheus]
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    ports: ["16686:16686"]
+
+volumes:
+  customer-data:
+  restaurant-data:
+  order-data:
+  payment-data:
+  delivery-data:
+
+  # --------- One-off seeders (run to import CSVs) ----------
+  customer-seed:
+    build: ./customer-service
+    environment:
+      DATABASE_URL: postgresql://customer:customerpw@customer-db:5432/customerdb
+      DATA_DIR: /seed/data
+    depends_on:
+      customer-db:
+        condition: service_healthy
+    volumes:
+      - ./data:/seed/data:ro
+    command: ["python","-m","app.seed_data"]
+    restart: "no"
+
+  restaurant-seed:
+    build: ./restaurant-service
+    environment:
+      DATABASE_URL: postgresql://restaurant:restaurantpw@restaurant-db:5432/restaurantdb
+      DATA_DIR: /seed/data
+    depends_on:
+      restaurant-db:
+        condition: service_healthy
+    volumes:
+      - ./data:/seed/data:ro
+    command: ["python","-m","app.seed_data"]
+    restart: "no"
+
+  order-seed:
+    build: ./order-service
+    environment:
+      DATABASE_URL: postgresql://order:orderpw@order-db:5432/orderdb
+      DATA_DIR: /seed/data
+    depends_on:
+      order-db:
+        condition: service_healthy
+    volumes:
+      - ./data:/seed/data:ro
+    command: ["python","-m","app.seed_data"]
+    restart: "no"
+
+  payment-seed:
+    build: ./payment-service
+    environment:
+      DATABASE_URL: postgresql://payment:paymentpw@payment-db:5432/paymentdb
+      DATA_DIR: /seed/data
+    depends_on:
+      payment-db:
+        condition: service_healthy
+    volumes:
+      - ./data:/seed/data:ro
+    command: ["python","-m","app.seed_data"]
+    restart: "no"
+
+  delivery-seed:
+    build: ./delivery-service
+    environment:
+      DATABASE_URL: postgresql://delivery:deliverypw@delivery-db:5432/deliverydb
+      DATA_DIR: /seed/data
+    depends_on:
+      delivery-db:
+        condition: service_healthy
+    volumes:
+      - ./data:/seed/data:ro
+    command: ["python","-m","app.seed_data"]
+    restart: "no"
+

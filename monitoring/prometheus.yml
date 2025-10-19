@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 5s
+scrape_configs:
+  - job_name: 'customer-service'
+    static_configs: [{ targets: ['customer-service:80'] }]
+  - job_name: 'restaurant-service'
+    static_configs: [{ targets: ['restaurant-service:80'] }]
+  - job_name: 'order-service'
+    static_configs: [{ targets: ['order-service:80'] }]
+  - job_name: 'payment-service'
+    static_configs: [{ targets: ['payment-service:80'] }]
+  - job_name: 'delivery-service'
+    static_configs: [{ targets: ['delivery-service:80'] }]
+  - job_name: 'notification-service'
+    metrics_path: /metrics
+    static_configs: [{ targets: ['notification-service:80'] }]

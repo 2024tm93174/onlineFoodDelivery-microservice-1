@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: payment-pvc
+  namespace: foodgo
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-db
+  namespace: foodgo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-db
+  template:
+    metadata:
+      labels:
+        app: payment-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports: [{containerPort: 5432}]
+          env:
+            - name: POSTGRES_DB
+              value: "paymentdb"
+            - name: POSTGRES_USER
+              value: "payment"
+            - name: POSTGRES_PASSWORD
+              value: "paymentpw"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: payment-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-db
+  namespace: foodgo
+spec:
+  type: ClusterIP
+  selector:
+    app: payment-db
+  ports:
+    - port: 5432
+      targetPort: 5432
