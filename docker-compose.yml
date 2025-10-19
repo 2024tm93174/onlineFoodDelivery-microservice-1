@@ -1,13 +1,8 @@
 name: foodgo
+
 services:
   # --------- Databases ----------
   customer-db:
-
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U customer -d customerdb"]
-      interval: 5s
-      timeout: 3s
-      retries: 30
     image: postgres:16
     container_name: customer-db
     environment:
@@ -17,14 +12,13 @@ services:
     ports: ["5433:5432"]
     volumes:
       - customer-data:/var/lib/postgresql/data
-
-  restaurant-db:
-
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U restaurant -d restaurantdb"]
+      test: ["CMD-SHELL", "pg_isready -U customer -d customerdb"]
       interval: 5s
       timeout: 3s
       retries: 30
+
+  restaurant-db:
     image: postgres:16
     environment:
       POSTGRES_DB: restaurantdb
@@ -33,14 +27,13 @@ services:
     ports: ["5434:5432"]
     volumes:
       - restaurant-data:/var/lib/postgresql/data
-
-  order-db:
-
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U order -d orderdb"]
+      test: ["CMD-SHELL", "pg_isready -U restaurant -d restaurantdb"]
       interval: 5s
       timeout: 3s
       retries: 30
+
+  order-db:
     image: postgres:16
     environment:
       POSTGRES_DB: orderdb
@@ -49,14 +42,13 @@ services:
     ports: ["5435:5432"]
     volumes:
       - order-data:/var/lib/postgresql/data
-
-  payment-db:
-
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U payment -d paymentdb"]
+      test: ["CMD-SHELL", "pg_isready -U order -d orderdb"]
       interval: 5s
       timeout: 3s
       retries: 30
+
+  payment-db:
     image: postgres:16
     environment:
       POSTGRES_DB: paymentdb
@@ -65,14 +57,13 @@ services:
     ports: ["5436:5432"]
     volumes:
       - payment-data:/var/lib/postgresql/data
-
-  delivery-db:
-
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U delivery -d deliverydb"]
+      test: ["CMD-SHELL", "pg_isready -U payment -d paymentdb"]
       interval: 5s
       timeout: 3s
       retries: 30
+
+  delivery-db:
     image: postgres:16
     environment:
       POSTGRES_DB: deliverydb
@@ -81,20 +72,27 @@ services:
     ports: ["5437:5432"]
     volumes:
       - delivery-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U delivery -d deliverydb"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
 
-  # --------- Services ----------
+  # --------- Microservices ----------
   customer-service:
     build: ./customer-service
     environment:
       DATABASE_URL: postgresql://customer:customerpw@customer-db:5432/customerdb
-    depends_on: [customer-db]
+    depends_on:
+      - customer-db
     ports: ["8010:80"]
 
   restaurant-service:
     build: ./restaurant-service
     environment:
       DATABASE_URL: postgresql://restaurant:restaurantpw@restaurant-db:5432/restaurantdb
-    depends_on: [restaurant-db]
+    depends_on:
+      - restaurant-db
     ports: ["8020:80"]
 
   order-service:
@@ -105,21 +103,28 @@ services:
       PAYMENT_SERVICE_URL: http://payment-service:80
       DELIVERY_SERVICE_URL: http://delivery-service:80
       NOTIFICATION_SERVICE_URL: http://notification-service:80
-    depends_on: [order-db, restaurant-service, payment-service, delivery-service, notification-service]
+    depends_on:
+      - order-db
+      - restaurant-service
+      - payment-service
+      - delivery-service
+      - notification-service
     ports: ["8030:80"]
 
   payment-service:
     build: ./payment-service
     environment:
       DATABASE_URL: postgresql://payment:paymentpw@payment-db:5432/paymentdb
-    depends_on: [payment-db]
+    depends_on:
+      - payment-db
     ports: ["8040:80"]
 
   delivery-service:
     build: ./delivery-service
     environment:
       DATABASE_URL: postgresql://delivery:deliverypw@delivery-db:5432/deliverydb
-    depends_on: [delivery-db]
+    depends_on:
+      - delivery-db
     ports: ["8050:80"]
 
   notification-service:
@@ -136,20 +141,14 @@ services:
   grafana:
     image: grafana/grafana:11.1.4
     ports: ["3000:3000"]
-    depends_on: [prometheus]
+    depends_on:
+      - prometheus
 
   jaeger:
     image: jaegertracing/all-in-one:1.57
     ports: ["16686:16686"]
 
-volumes:
-  customer-data:
-  restaurant-data:
-  order-data:
-  payment-data:
-  delivery-data:
-
-  # --------- One-off seeders (run to import CSVs) ----------
+  # --------- One-off seeders (for CSV data import) ----------
   customer-seed:
     build: ./customer-service
     environment:
@@ -160,7 +159,7 @@ volumes:
         condition: service_healthy
     volumes:
       - ./data:/seed/data:ro
-    command: ["python","-m","app.seed_data"]
+    command: ["python", "-m", "app.seed_data"]
     restart: "no"
 
   restaurant-seed:
@@ -173,7 +172,7 @@ volumes:
         condition: service_healthy
     volumes:
       - ./data:/seed/data:ro
-    command: ["python","-m","app.seed_data"]
+    command: ["python", "-m", "app.seed_data"]
     restart: "no"
 
   order-seed:
@@ -186,7 +185,7 @@ volumes:
         condition: service_healthy
     volumes:
       - ./data:/seed/data:ro
-    command: ["python","-m","app.seed_data"]
+    command: ["python", "-m", "app.seed_data"]
     restart: "no"
 
   payment-seed:
@@ -199,7 +198,7 @@ volumes:
         condition: service_healthy
     volumes:
       - ./data:/seed/data:ro
-    command: ["python","-m","app.seed_data"]
+    command: ["python", "-m", "app.seed_data"]
     restart: "no"
 
   delivery-seed:
@@ -212,6 +211,13 @@ volumes:
         condition: service_healthy
     volumes:
       - ./data:/seed/data:ro
-    command: ["python","-m","app.seed_data"]
+    command: ["python", "-m", "app.seed_data"]
     restart: "no"
+
+volumes:
+  customer-data:
+  restaurant-data:
+  order-data:
+  payment-data:
+  delivery-data:
 
