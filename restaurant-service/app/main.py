@@ -35,5 +35,5 @@ async def health():
 async def metrics():
     return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
-app.include_router(restaurants.router, prefix='/v1')
-app.include_router(menu.router, prefix='/v1')
+app.include_router(restaurants.router)
+app.include_router(menu.router)
