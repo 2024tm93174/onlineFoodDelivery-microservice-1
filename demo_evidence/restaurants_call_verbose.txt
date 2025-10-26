@@ -1,0 +1,26 @@
+* Host localhost:8070 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:8070...
+* Connected to localhost (::1) port 8070
+> GET /v1/restaurants/1 HTTP/1.1
+> Host: localhost:8070
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 500 Internal Server Error
+< date: Wed, 22 Oct 2025 14:32:51 GMT
+< server: uvicorn
+< content-length: 21
+< content-type: text/plain; charset=utf-8
+< 
+{ [21 bytes data]
+* Connection #0 to host localhost left intact
+HTTP/1.1 500 Internal Server Error
+date: Wed, 22 Oct 2025 14:32:51 GMT
+server: uvicorn
+content-length: 21
+content-type: text/plain; charset=utf-8
+
+Internal Server Error

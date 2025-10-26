@@ -1,0 +1,62 @@
+Name:             restaurant-service-85979b5d8-n5r4h
+Namespace:        foodgo
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 22 Oct 2025 19:21:27 +0530
+Labels:           app=restaurant-service
+                  pod-template-hash=85979b5d8
+Annotations:      kubectl.kubernetes.io/restartedAt: 2025-10-22T19:21:27+05:30
+Status:           Running
+IP:               10.244.0.30
+IPs:
+  IP:           10.244.0.30
+Controlled By:  ReplicaSet/restaurant-service-85979b5d8
+Containers:
+  restaurant-service:
+    Container ID:   docker://bed534ac7af052d6e3beb4e805c3bf3747704b0b8f53dccb1c323806fca21b22
+    Image:          restaurant-service:latest
+    Image ID:       docker://sha256:2b7bdddcbb472286bd9e27cecad4e738e4a28a0706f9454a24a513c244d2b478
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 22 Oct 2025 19:21:28 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  512Mi
+    Requests:
+      cpu:      100m
+      memory:   128Mi
+    Liveness:   http-get http://:80/health delay=10s timeout=1s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:80/health delay=5s timeout=1s period=5s #success=1 #failure=3
+    Environment:
+      DATABASE_URL:  postgresql://restaurant:restaurantpw@restaurant-db.foodgo.svc.cluster.local:5432/restaurantdb
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2lr67 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-2lr67:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  47m   default-scheduler  Successfully assigned foodgo/restaurant-service-85979b5d8-n5r4h to minikube
+  Normal  Pulled     47m   kubelet            Container image "restaurant-service:latest" already present on machine
+  Normal  Created    47m   kubelet            Created container: restaurant-service
+  Normal  Started    47m   kubelet            Started container restaurant-service

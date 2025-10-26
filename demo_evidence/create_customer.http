@@ -1,0 +1,8 @@
+HTTP/1.1 201 Created
+date: Wed, 22 Oct 2025 14:18:15 GMT
+server: uvicorn
+content-length: 93
+content-type: application/json
+x-correlation-id: e4e7c043-dbdb-4821-985b-5a7edb8bc74f
+
+{"customer_id":1,"name":"Demo Customer","email":"demo+user@example.com","phone":"9999999999"}
