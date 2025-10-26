@@ -20,8 +20,8 @@ spec:
           ports:
             - containerPort: 80
           env:
-        - name: DATABASE_URL
-          value: "postgresql://payment:paymentpw@payment-db.foodgo.svc.cluster.local:5432/paymentdb"
+            - name: DATABASE_URL
+              value: "postgresql://payment:paymentpw@payment-db.foodgo.svc.cluster.local:5432/paymentdb"
           readinessProbe:
             httpGet: { path: /health, port: 80 }
             initialDelaySeconds: 5

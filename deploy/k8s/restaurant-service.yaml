@@ -20,8 +20,8 @@ spec:
           ports:
             - containerPort: 80
           env:
-        - name: DATABASE_URL
-          value: "postgresql://restaurant:restaurantpw@restaurant-db.foodgo.svc.cluster.local:5432/restaurantdb"
+            - name: DATABASE_URL
+              value: "postgresql://restaurant:restaurantpw@restaurant-db.foodgo.svc.cluster.local:5432/restaurantdb"
           readinessProbe:
             httpGet: { path: /health, port: 80 }
             initialDelaySeconds: 5

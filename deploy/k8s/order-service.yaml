@@ -20,16 +20,16 @@ spec:
           ports:
             - containerPort: 80
           env:
-        - name: DATABASE_URL
-          value: "postgresql://order:orderpw@order-db.foodgo.svc.cluster.local:5432/orderdb"
-        - name: RESTAURANT_SERVICE_URL
-          value: "http://restaurant-service.foodgo.svc.cluster.local"
-        - name: PAYMENT_SERVICE_URL
-          value: "http://payment-service.foodgo.svc.cluster.local"
-        - name: DELIVERY_SERVICE_URL
-          value: "http://delivery-service.foodgo.svc.cluster.local"
-        - name: NOTIFICATION_SERVICE_URL
-          value: "http://notification-service.foodgo.svc.cluster.local"
+            - name: DATABASE_URL
+              value: "postgresql://order:orderpw@order-db.foodgo.svc.cluster.local:5432/orderdb"
+            - name: RESTAURANT_SERVICE_URL
+              value: "http://restaurant-service.foodgo.svc.cluster.local"
+            - name: PAYMENT_SERVICE_URL
+              value: "http://payment-service.foodgo.svc.cluster.local"
+            - name: DELIVERY_SERVICE_URL
+              value: "http://delivery-service.foodgo.svc.cluster.local"
+            - name: NOTIFICATION_SERVICE_URL
+              value: "http://notification-service.foodgo.svc.cluster.local"
           readinessProbe:
             httpGet: { path: /health, port: 80 }
             initialDelaySeconds: 5
