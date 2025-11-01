@@ -1,0 +1,9 @@
+Customer: http://localhost:8010/health | http://localhost:8010/docs
+Restaurant: http://localhost:8020/health | http://localhost:8020/docs
+Order: http://localhost:8030/health | http://localhost:8030/docs
+Payment: http://localhost:8040/health | http://localhost:8040/docs
+Delivery: http://localhost:8050/health | http://localhost:8050/docs
+Notification: http://localhost:8060/health | http://localhost:8060/docs
+Prometheus: http://localhost:9090
+Grafana: http://localhost:3000 (user: admin / pass: admin)
+Jaeger: http://localhost:16686

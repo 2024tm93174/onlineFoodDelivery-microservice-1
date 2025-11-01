@@ -70,7 +70,7 @@ def seed():
         dfi = pd.read_csv(order_items_csv)
         for _, r in dfi.iterrows():
             db.add(OrderItem(
-                order_item_id=int(r["order_item_id"]),
+                id = int(r["order_item_id"]),
                 order_id=int(r["order_id"]),
                 item_id=int(r["item_id"]),
                 quantity=int(r["quantity"]),

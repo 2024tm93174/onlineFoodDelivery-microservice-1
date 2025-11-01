@@ -42,9 +42,9 @@ class Address(Base):
 class Order(Base):
     __tablename__ = "orders"
     order_id: Mapped[int]       = mapped_column(Integer, Identity(always=False), primary_key=True)
-    customer_id: Mapped[int]    = mapped_column(ForeignKey("customers.customer_id"), nullable=False)
-    restaurant_id: Mapped[int]  = mapped_column(ForeignKey("restaurants.restaurant_id"), nullable=False)
-    address_id: Mapped[int]     = mapped_column(ForeignKey("addresses.address_id"), nullable=False)
+    customer_id: Mapped[int]    = mapped_column(Integer, nullable=False)
+    restaurant_id: Mapped[int]  = mapped_column(Integer, nullable=False)
+    address_id: Mapped[int]     = mapped_column(Integer, nullable=False)
     order_status: Mapped[str]   = mapped_column(String(40), nullable=False, default="PENDING")
     order_total: Mapped[float]  = mapped_column(Float, nullable=False, default=0.0)
     payment_status: Mapped[str] = mapped_column(String(40), nullable=False, default="INIT")
