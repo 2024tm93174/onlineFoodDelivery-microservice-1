@@ -1,0 +1,34 @@
+payment-service-1  | INFO:     Started server process [1]
+payment-service-1  | INFO:     Waiting for application startup.
+payment-service-1  | INFO:     Application startup complete.
+payment-service-1  | INFO:     Uvicorn running on http://0.0.0.0:80 (Press CTRL+C to quit)
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK
+payment-service-1  | INFO:     172.19.0.7:47974 - "GET /metrics HTTP/1.1" 200 OK

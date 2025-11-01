@@ -1,0 +1,35 @@
+order-service-1  | INFO:     Started server process [1]
+order-service-1  | INFO:     Waiting for application startup.
+order-service-1  | INFO:     Application startup complete.
+order-service-1  | INFO:     Uvicorn running on http://0.0.0.0:80 (Press CTRL+C to quit)
+order-service-1  | INFO:     172.19.0.7:42318 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:42318 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:42318 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:42318 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:42318 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:47798 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.1:42146 - "GET /v1/orders/1 HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
+order-service-1  | INFO:     172.19.0.7:59714 - "GET /metrics HTTP/1.1" 200 OK
