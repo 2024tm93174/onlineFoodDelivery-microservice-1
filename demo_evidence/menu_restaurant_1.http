@@ -1,7 +1,8 @@
-HTTP/1.1 500 Internal Server Error
-date: Wed, 22 Oct 2025 14:19:19 GMT
+HTTP/1.1 200 OK
+date: Sat, 01 Nov 2025 07:21:45 GMT
 server: uvicorn
-content-length: 21
-content-type: text/plain; charset=utf-8
+content-length: 990
+content-type: application/json
+x-correlation-id: f9606510-7e2d-44a8-a2af-c2b731af3355
 
-Internal Server Error
+{"items":[{"item_id":1,"name":"Tandoori Noodles","category":"Main Course","price":240.86,"is_available":true},{"item_id":2,"name":"Mushroom Roll","category":"Main Course","price":153.96,"is_available":true},{"item_id":3,"name":"Grilled Fry","category":"Starter","price":412.97,"is_available":true},{"item_id":4,"name":"Chicken Pasta","category":"Beverage","price":544.92,"is_available":true},{"item_id":5,"name":"Chilli Tikka","category":"Dessert","price":202.06,"is_available":true},{"item_id":6,"name":"Chilli Fry","category":"Main Course","price":288.65,"is_available":true},{"item_id":7,"name":"Grilled Burger","category":"Starter","price":273.24,"is_available":true},{"item_id":8,"name":"Tandoori Burger","category":"Beverage","price":430.05,"is_available":true},{"item_id":9,"name":"Veg Roll","category":"Beverage","price":443.53,"is_available":true},{"item_id":10,"name":"Cheese Pizza","category":"Main Course","price":266.03,"is_available":true}],"page":1,"page_size":50,"total":10}

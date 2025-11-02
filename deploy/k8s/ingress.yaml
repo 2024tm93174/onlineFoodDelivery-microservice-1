@@ -4,16 +4,101 @@ metadata:
   name: foodgo-ingress
   namespace: foodgo
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
+    # Optional: ensure client IPs and proxy headers are handled by nginx ingress
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
+  ingressClassName: nginx
   rules:
     - host: foodgo.local
       http:
         paths:
-          - path: /order
+          - path: /v1/customers
+            pathType: Prefix
+            backend:
+              service:
+                name: customer-service
+                port:
+                  number: 80
+          - path: /v1/customers/
+            pathType: Prefix
+            backend:
+              service:
+                name: customer-service
+                port:
+                  number: 80
+
+          - path: /v1/restaurants
+            pathType: Prefix
+            backend:
+              service:
+                name: restaurant-service
+                port:
+                  number: 80
+          - path: /v1/restaurants/
+            pathType: Prefix
+            backend:
+              service:
+                name: restaurant-service
+                port:
+                  number: 80
+
+          - path: /v1/orders
             pathType: Prefix
             backend:
               service:
                 name: order-service
+                port:
+                  number: 80
+          - path: /v1/orders/
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service
+                port:
+                  number: 80
+
+          - path: /v1/payments
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-service
+                port:
+                  number: 80
+          - path: /v1/payments/
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-service
+                port:
+                  number: 80
+
+          - path: /v1/delivery
+            pathType: Prefix
+            backend:
+              service:
+                name: delivery-service
+                port:
+                  number: 80
+          - path: /v1/delivery/
+            pathType: Prefix
+            backend:
+              service:
+                name: delivery-service
+                port:
+                  number: 80
+
+          - path: /v1/notifications
+            pathType: Prefix
+            backend:
+              service:
+                name: notification-service
+                port:
+                  number: 80
+          - path: /v1/notifications/
+            pathType: Prefix
+            backend:
+              service:
+                name: notification-service
                 port:
                   number: 80

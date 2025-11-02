@@ -1,7 +1,8 @@
-HTTP/1.1 500 Internal Server Error
-date: Wed, 22 Oct 2025 14:19:18 GMT
+HTTP/1.1 200 OK
+date: Sat, 01 Nov 2025 07:21:19 GMT
 server: uvicorn
-content-length: 21
-content-type: text/plain; charset=utf-8
+content-length: 103
+content-type: application/json
+x-correlation-id: c39c1393-e018-40dc-beae-e6eb8f5b7024
 
-Internal Server Error
+{"restaurant_id":1,"name":"Green Garden","cuisine":"Mexican","city":"Pune","rating":4.8,"is_open":true}

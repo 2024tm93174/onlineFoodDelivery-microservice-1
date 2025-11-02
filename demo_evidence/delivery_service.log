@@ -1,0 +1,34 @@
+delivery-service-1  | INFO:     Started server process [1]
+delivery-service-1  | INFO:     Waiting for application startup.
+delivery-service-1  | INFO:     Application startup complete.
+delivery-service-1  | INFO:     Uvicorn running on http://0.0.0.0:80 (Press CTRL+C to quit)
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:38494 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK
+delivery-service-1  | INFO:     172.19.0.7:45450 - "GET /metrics HTTP/1.1" 200 OK

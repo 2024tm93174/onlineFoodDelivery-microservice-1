@@ -1,0 +1,15 @@
+NAME                            IMAGE                           COMMAND                  SERVICE                CREATED         STATUS                   PORTS
+customer-db                     postgres:16                     "docker-entrypoint.s…"   customer-db            3 minutes ago   Up 3 minutes (healthy)   0.0.0.0:5433->5432/tcp, :::5433->5432/tcp
+foodgo-customer-service-1       foodgo-customer-service         "uvicorn app.main:ap…"   customer-service       2 minutes ago   Up 2 minutes             0.0.0.0:8010->80/tcp, :::8010->80/tcp
+foodgo-delivery-db-1            postgres:16                     "docker-entrypoint.s…"   delivery-db            3 minutes ago   Up 3 minutes (healthy)   0.0.0.0:5437->5432/tcp, :::5437->5432/tcp
+foodgo-delivery-service-1       foodgo-delivery-service         "uvicorn app.main:ap…"   delivery-service       2 minutes ago   Up 2 minutes             0.0.0.0:8050->80/tcp, :::8050->80/tcp
+foodgo-grafana-1                grafana/grafana:11.1.4          "/run.sh"                grafana                3 minutes ago   Up 3 minutes             0.0.0.0:3000->3000/tcp, :::3000->3000/tcp
+foodgo-jaeger-1                 jaegertracing/all-in-one:1.57   "/go/bin/all-in-one-…"   jaeger                 3 minutes ago   Up 3 minutes             4317-4318/tcp, 5775/udp, 5778/tcp, 9411/tcp, 14250/tcp, 14268/tcp, 6831-6832/udp, 0.0.0.0:16686->16686/tcp, :::16686->16686/tcp
+foodgo-notification-service-1   foodgo-notification-service     "uvicorn app.main:ap…"   notification-service   2 minutes ago   Up 2 minutes             0.0.0.0:8060->80/tcp, :::8060->80/tcp
+foodgo-order-db-1               postgres:16                     "docker-entrypoint.s…"   order-db               3 minutes ago   Up 3 minutes (healthy)   0.0.0.0:5435->5432/tcp, :::5435->5432/tcp
+foodgo-order-service-1          foodgo-order-service            "uvicorn app.main:ap…"   order-service          2 minutes ago   Up 2 minutes             0.0.0.0:8030->80/tcp, :::8030->80/tcp
+foodgo-payment-db-1             postgres:16                     "docker-entrypoint.s…"   payment-db             3 minutes ago   Up 3 minutes (healthy)   0.0.0.0:5436->5432/tcp, :::5436->5432/tcp
+foodgo-payment-service-1        foodgo-payment-service          "uvicorn app.main:ap…"   payment-service        2 minutes ago   Up 2 minutes             0.0.0.0:8040->80/tcp, :::8040->80/tcp
+foodgo-prometheus-1             prom/prometheus:v2.54.1         "/bin/prometheus --c…"   prometheus             3 minutes ago   Up 3 minutes             0.0.0.0:9090->9090/tcp, :::9090->9090/tcp
+foodgo-restaurant-db-1          postgres:16                     "docker-entrypoint.s…"   restaurant-db          3 minutes ago   Up 3 minutes (healthy)   0.0.0.0:5434->5432/tcp, :::5434->5432/tcp
+foodgo-restaurant-service-1     foodgo-restaurant-service       "uvicorn app.main:ap…"   restaurant-service     2 minutes ago   Up 2 minutes             0.0.0.0:8020->80/tcp, :::8020->80/tcp
