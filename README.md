@@ -101,3 +101,14 @@ docker compose run --rm delivery-seed
 - Seed scripts parse dates like `DD/MM/YY HH:MM` and set the same IDs as in CSV.
 - Order seeding also populates replicated fields `restaurant_name` and `address_city` from the CSVs.
 # onlineFoodDelivery-microservice
+
+# curl cmds
+curl -X POST http://foodgo.local:60715/v1/customers \ -H "Content-Type: application/json" \ -d '{ "name": "John Doe", "email": "john@example.com", "address": "123 Main Street", "phone": "9876543210" }'
+
+curl -X POST http://foodgo.local:60715/v1/orders \ -H "Content-Type: application/json" \ -H "Idempotency-Key: 123e4567-e89b-12d3-a456-426614174000" \ -d '{ "customer_id": 2, "restaurant_id": 1, "address_id": 1, "city": "Pune", "lines": [ {"item_id": 1, "quantity": 2}, {"item_id": 3, "quantity": 1} ], "payment_method": "CREDIT_CARD" }
+
+curl -X POST http://foodgo.local:60715/v1/payments/charge \ -H "Content-Type: application/json" \ -H "Idempotency-Key: 1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p" \ -d '{ "order_id": 1, "amount": 969.42, "method": "CARD" }'
+
+curl -X POST http://foodgo.local:60715/v1/deliveries/assign \ -H "Content-Type: application/json" \ -d '{ "order_id": 1, "city": "Pune" }'
+
+
